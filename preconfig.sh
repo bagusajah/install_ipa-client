@@ -28,15 +28,17 @@ function isinstalled {
 if isinstalled $package; then echo "installed"; else yum install python -y; fi
 if [ "$osversion" == "$centos7" ]
   then
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=80/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=443/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=389/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=88/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=88/udp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=464/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=464/udp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=53/tcp
-  firewall-cmd --zone=IN_public_allow --permanent --add-port=53/udp
+  echo "menambahkan port"
+  firewall-cmd --permanent --add-port=80/tcp
+  firewall-cmd --permanent --add-port=443/tcp
+  firewall-cmd --permanent --add-port=389/tcp
+  firewall-cmd --permanent --add-port=88/tcp
+  firewall-cmd --permanent --add-port=88/udp
+  firewall-cmd --permanent --add-port=464/tcp
+  firewall-cmd --permanent --add-port=464/udp
+  firewall-cmd --permanent --add-port=53/tcp
+  firewall-cmd --permanent --add-port=53/udp
+  echo "reload firewall"
   firewall-cmd --reload
   echo "selesai apply firewall untuk Centos 7"
 fi
