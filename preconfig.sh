@@ -8,7 +8,7 @@ setsshfile="$(chmod 0640 /root/.ssh/authorized_keys)"
 osversion="$(cat /etc/redhat-release | cut -d"." -f1)"
 centos7="CentOS Linux release 7"
 centos6="CentOS Linux release 6"
-
+package="python"
 rm -f /root/.ssh/authorized_keys;
 echo "Add ssh key"
 echo $sshKey > /root/.ssh/authorized_keys && $setsshdir && $setsshfile
@@ -18,8 +18,14 @@ echo "$(hostname $changehostname)"
 sed -i '/DNS1/c\DNS1=172.16.10.159' /etc/sysconfig/network-scripts/ifcfg-eth0
 sed -i '/DNS2/c\DNS2=202.152.0.2' /etc/sysconfig/network-scripts/ifcfg-eth0
 sed -i '/localhost/c\'$changehostname'' inventory/hosts
-yum install python -y
-
+function isinstalled {
+  if yum list installed "$@" >/dev/null 2>&1; then
+    true
+  else
+    false
+  fi
+}
+if isinstalled $package; then echo "installed"; else yum install python -y; fi
 if [ "$osversion" == "$centos7" ]
   then
   firewall-cmd --zone=IN_public_allow --permanent --add-port=80/tcp
