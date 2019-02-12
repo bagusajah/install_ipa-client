@@ -1,7 +1,6 @@
 ---
 - hosts: ipaclients
   become: true
-  become_user: root
 
   roles:
   - role: ipaclient
