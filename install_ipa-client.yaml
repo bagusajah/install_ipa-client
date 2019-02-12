@@ -2,6 +2,8 @@
 - name: Playbook buat install IPA client dengan username dan password
 - hosts: ipaclients
   become: true
+  vars_files:
+  - hosts
   
   tasks:
   - name: "Periksa EPEL repo"
