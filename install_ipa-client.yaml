@@ -37,7 +37,7 @@
       name: ipa-client
       state: present
 
-  - name: "Configure  IPA client"
+  - name: "Configure IPA client"
     ipaclient:
       state: present
       domain: "{{ ipaclient_domain }}"
