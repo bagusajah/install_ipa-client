@@ -6,10 +6,18 @@ localhost
 ipa01.truemoneyid.internal
 
 [ipaclients:vars]
+ipaclient_keytab=/tmp/krb5.keytab
 ipaclient_domain=truemoneyid.internal
 ipaclient_realm=TRUEMONEYID.INTERNAL
 ipaclient_extraargs=[ '--kinit-attempts=3', '--mkhomedir']
 ipaclient_principal=admin
 ipaclient_password=VMware1!
+ipaclient_mkhomedir=yes
+ipaclient_use_otp=no
+ipaclient_force_join=yes
+ipaclient_kinit_attempts=3
+ipaclient_mkhomedir=yes
+ipaclient_allow_repair=yes
+
 epel_repo_url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
 epel_gpg_key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}

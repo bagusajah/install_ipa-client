@@ -10,9 +10,9 @@ centos7="CentOS Linux release 7"
 centos6="CentOS Linux release 6"
 package="python"
 installPython="$(yum install python -y)"
-rm -f /root/.ssh/authorized_keys;
+
 echo "Add ssh key"
-echo $sshKey > /root/.ssh/authorized_keys && $setsshdir && $setsshfile
+echo $sshKey >> /root/.ssh/authorized_keys && $setsshdir && $setsshfile
 echo "Set hostname to $changehostname"
 echo $changehostname > /etc/hostname
 echo "$(hostname $changehostname)"
