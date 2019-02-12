@@ -3,10 +3,8 @@
 - name: Playbook buat install IPA client dengan username dan password
 - hosts: ipaclients
   become: true
-  vars_files:
-  - inventory/hosts
 
-  tasks:
+  pre_tasks:
   - name: Periksa EPEL repo
     stat: path={{ epel_repo_url }}
     register: epel_repofile_result
@@ -33,16 +31,18 @@
       name: '*'
       state: latest
 
-  - name: Install IPA Client
-    package:
-      name: ipa-client
-      state: present
+  - hosts: ipaclients
+    roles:
+    - name: Install IPA Client
+      package:
+        name: ipa-client
+        state: present
 
-  - name: Configure IPA client
-    ipaclient:
-      state: present
-      domain: "{{ ipaclient_domain }}"
-      realm: "{{ ipaclient_realm }}"
-      principal: "{{ ipaclient_principal }}"
-      password: "{{ ipaclient_password }}"
-      extra_args: "{{ ipaclient_extraargs }}"
+    - name: Configure IPA client
+      ipaclient:
+        state: present
+        domain: "{{ ipaclient_domain }}"
+        realm: "{{ ipaclient_realm }}"
+        principal: "{{ ipaclient_principal }}"
+        password: "{{ ipaclient_password }}"
+        extra_args: "{{ ipaclient_extraargs }}"
