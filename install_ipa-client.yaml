@@ -11,7 +11,7 @@
   - role: ipaclient
     state: present
 
-  task:
+  tasks:
   - name: Periksa EPEL repo
     stat: path={{ epel_repo_url }}
     register: epel_repofile_result
