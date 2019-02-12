@@ -1,0 +1,14 @@
+[ipaclients]
+localhost
+
+[ipaservers]
+ipa01.truemoneyid.internal
+
+[ipaclients:vars]
+ipaclient_domain=truemoneyid.internal
+ipaclient_realm=TRUEMONEYID.INTERNAL
+ipaclient_extraargs=[ '--kinit-attempts=3', '--mkhomedir']
+ipaclient_principal=admin
+ipaclient_password=VMware1!
+epel_repo_url=https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm
+epel_gpg_key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
