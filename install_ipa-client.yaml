@@ -1,12 +1,13 @@
 ---
+
 - name: Playbook buat install IPA client dengan username dan password
 - hosts: ipaclients
   become: true
   vars_files:
-  - hosts
+  - inventory/hosts
 
   tasks:
-  - name: "Periksa EPEL repo"
+  - name: Periksa EPEL repo
     stat: path={{ epel_repo_url }}
     register: epel_repofile_result
 
@@ -20,24 +21,24 @@
     delay: 10
     when: not epel_repofile_result.stat.exists
 
-  - name: "Import EPEL GPG key."
+  - name: Import EPEL GPG key
     rpm_key:
       key: "{{ epel_gpg_key }}"
       state: present
     when: not epel_repofile_result.stat.exists
     ignore_errors: "{{ ansible_check_mode }}"
 
-  - name: "Update yum"
+  - name: Update yum
     yum:
       name: '*'
       state: latest
 
-  - name: "Install IPA Client"
+  - name: Install IPA Client
     package:
       name: ipa-client
       state: present
 
-  - name: "Configure IPA client"
+  - name: Configure IPA client
     ipaclient:
       state: present
       domain: "{{ ipaclient_domain }}"
