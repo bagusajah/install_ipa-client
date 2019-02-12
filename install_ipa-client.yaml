@@ -5,6 +5,13 @@
   become: true
 
   pre_tasks:
+  - shell: echo 'prepare'
+  
+  roles:
+  - role: ipaclient
+    state: present
+
+  task:
   - name: Periksa EPEL repo
     stat: path={{ epel_repo_url }}
     register: epel_repofile_result
@@ -30,19 +37,3 @@
     yum:
       name: '*'
       state: latest
-
-  - hosts: ipaclients
-    roles:
-    - name: Install IPA Client
-      package:
-        name: ipa-client
-        state: present
-
-    - name: Configure IPA client
-      ipaclient:
-        state: present
-        domain: "{{ ipaclient_domain }}"
-        realm: "{{ ipaclient_realm }}"
-        principal: "{{ ipaclient_principal }}"
-        password: "{{ ipaclient_password }}"
-        extra_args: "{{ ipaclient_extraargs }}"
