@@ -4,9 +4,6 @@
 - hosts: ipaclients
   become: true
 
-  pre_tasks:
-  - shell: echo 'prepare'
-  
   roles:
   - role: ipaclient
     state: present
