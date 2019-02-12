@@ -1,6 +1,4 @@
 ---
-
-- name: Playbook buat install IPA client dengan username dan password
 - hosts: ipaclients
   become: true
 
