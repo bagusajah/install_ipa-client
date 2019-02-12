@@ -18,7 +18,7 @@ echo $changehostname > /etc/hostname
 echo "$(hostname $changehostname)"
 sed -i '/DNS1/c\DNS1=172.16.10.159' /etc/sysconfig/network-scripts/ifcfg-eth0
 sed -i '/DNS2/c\DNS2=202.152.0.2' /etc/sysconfig/network-scripts/ifcfg-eth0
-sed -i '/localhost/c\'$changehostname'' inventory/hosts
+sed -i '/localhost/c\'$changehostname' ansible_user=root' inventory/hosts
 function isinstalled {
   if yum list installed "$@" >/dev/null 2>&1; then
     true
