@@ -9,14 +9,14 @@
     register: epel_repofile_result
     
   - name: "Install EPEL repo"
-   yum:
+    yum:
      name: "{{ epel_repo_url }}"
      state: present
-   register: result
-   until: 'result.rc == 0'
-   retries: 3
-   delay: 10
-   when: not epel_repofile_result.stat.exists
+    register: result
+    until: 'result.rc == 0'
+    retries: 3
+    delay: 10
+    when: not epel_repofile_result.stat.exists
    
   - name: "Import EPEL GPG key."
     rpm_key:
