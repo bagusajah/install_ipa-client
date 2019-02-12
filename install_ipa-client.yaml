@@ -1,6 +1,6 @@
 ---
 - name: Playbook to configure IPA clients with username/password
-- hosts: ipaclients
+  hosts: ipaclients
   become: true
 
   roles:
