@@ -1,6 +1,6 @@
 ---
 [ipaclients]
-localhost
+localhost ansible_user=root
 
 [ipaservers]
 ipa01.truemoneyid.internal
