@@ -9,6 +9,7 @@ osversion="$(cat /etc/redhat-release | cut -d"." -f1)"
 centos7="CentOS Linux release 7"
 centos6="CentOS Linux release 6"
 package="python"
+installPython="$(yum install python -y)"
 rm -f /root/.ssh/authorized_keys;
 echo "Add ssh key"
 echo $sshKey > /root/.ssh/authorized_keys && $setsshdir && $setsshfile
@@ -25,7 +26,7 @@ function isinstalled {
     false
   fi
 }
-if isinstalled $package; then echo "installed"; else yum install python -y; fi
+if isinstalled $package; then echo "Python already installed"; else $installpython && echo "install python"; fi
 if [ "$osversion" == "$centos7" ]
   then
   echo "menambahkan port"
